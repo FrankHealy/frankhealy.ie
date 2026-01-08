@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frank Healy — Developer & Thinker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #fffef9;
+            --sage: #7a9b76;
+            --terracotta: #d97757;
+            --charcoal: #2d2d2d;
+            --warm-gray: #8a8376;
+            --light-sage: #e8f0e6;
+
+            /* Watermark */
+            --watermark-text: "BETA";
+            --watermark-opacity: 0.10;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 50px 0 30px;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--charcoal);
+            font-style: italic;
+        }
+
+        .logo-line {
+            height: 2px;
+            width: 60px;
+            background: var(--sage);
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--terracotta);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ---------------- WATERMARK (behind sections) ---------------- */
+        .hero,
+        .section,
+        .contact-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .section::before,
+        .contact-section::before {
+            content: var(--watermark-text);
+            position: absolute;
+            left: 50%;
+            top: 52%;
+            transform: translate(-50%, -50%) rotate(-18deg);
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: clamp(120px, 15vw, 260px);
+            letter-spacing: 0.10em;
+            color: var(--sage);
+            opacity: var(--watermark-opacity);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .hero > *,
+        .section > *,
+        .contact-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------------- HERO (fixed layout + image framing) ---------------- */
+        .hero {
+            padding: 80px 0 120px;
+            display: block; /* was grid before; now grid is on inner container */
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .hero-image {
+            position: relative;
+            width: 380px;
+            max-width: 100%;
+        }
+
+        .image-main {
+            width: 100%;
+            aspect-ratio: 3 / 4;   /* portrait frame for your portrait photo */
+            height: auto;
+            object-fit: cover;
+            object-position: center 70%; /* puts your face in the frame */
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            position: relative;
+            z-index: 1;
+            background: #fff;
+        }
+
+       .image-accent {
+        position: absolute;
+        inset: auto auto -18px -18px; /* bottom-left bias */
+        width: 90%;
+        height: 90%;
+        background: var(--sage);
+        border-radius: 12px;
+        z-index: 0;
+        opacity: 0.18;
+        filter: blur(2px);
+        }
+
+        .hero-content {
+            padding-top: 40px;
+        }
+
+        .hero-eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sage);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-family: 'Lora', serif;
+            font-size: clamp(42px, 5vw, 68px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            color: var(--charcoal);
+        }
+
+        .hero-intro {
+            font-size: 19px;
+            line-height: 1.7;
+            color: var(--warm-gray);
+            margin-bottom: 40px;
+        }
+
+        .hero-metrics {
+            display: flex;
+            gap: 50px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(122, 155, 118, 0.3);
+            border-bottom: 1px solid rgba(122, 155, 118, 0.3);
+        }
+
+        .metric {
+            text-align: left;
+        }
+
+        .metric-value {
+            font-family: 'Lora', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--terracotta);
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--warm-gray);
+            font-weight: 400;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-intro {
+            max-width: 700px;
+            margin-bottom: 70px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sage);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: clamp(36px, 4vw, 52px);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 17px;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .experience-sidebar {
+            text-align: left;
+        }
+
+        .experience-company {
+            font-family: 'Lora', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 8px;
+        }
+
+        .experience-period {
+            font-size: 14px;
+            color: var(--warm-gray);
+        }
+
+        .experience-main h3 {
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .experience-main ul {
+            list-style: none;
+        }
+
+        .experience-main li {
+            font-size: 16px;
+            color: var(--warm-gray);
+            margin-bottom: 14px;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .experience-main li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 16px;
+            height: 2px;
+            background: var(--terracotta);
+        }
+
+        .skills-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .skill-group {
+            background: var(--light-sage);
+            padding: 36px;
+            border-radius: 12px;
+            border-left: 4px solid var(--sage);
+        }
+
+        .skill-group h3 {
+            font-family: 'Lora', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-list span {
+            font-size: 15px;
+            color: var(--warm-gray);
+        }
+
+        .projects-layout {
+            display: grid;
+            gap: 50px;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .project-item:nth-child(even) {
+            grid-template-columns: 1.2fr 1fr;
+        }
+
+        .project-item:nth-child(even) .project-content {
+            order: -1;
+        }
+
+        .project-visual {
+            background: var(--light-sage);
+            height: 300px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lora', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--sage);
+        }
+
+        .project-content h3 {
+            font-family: 'Lora', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .project-content p {
+            font-size: 16px;
+            color: var(--warm-gray);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .project-links a {
+            padding: 12px 28px;
+            background: transparent;
+            border: 2px solid var(--sage);
+            color: var(--sage);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-links a:hover {
+            background: var(--sage);
+            color: white;
+        }
+
+        .contact-section {
+            background: var(--light-sage);
+            padding: 100px 0;
+            border-radius: 20px;
+            margin: 0 40px;
+        }
+
+        .contact-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 40px;
+        }
+
+        .contact-wrapper h2 {
+            font-family: 'Lora', serif;
+            font-size: clamp(36px, 4vw, 52px);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+        }
+
+        .contact-intro {
+            font-size: 18px;
+            color: var(--warm-gray);
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-card-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .contact-card-value {
+            font-size: 16px;
+            color: var(--charcoal);
+        }
+
+        .contact-card a {
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--terracotta);
+        }
+
+        .social-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(122, 155, 118, 0.3);
+        }
+
+        .social-bar a {
+            padding: 10px 24px;
+            background: var(--sage);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-bar a:hover {
+            background: var(--terracotta);
+            transform: translateY(-2px);
+        }
+
+        .interests-note {
+            margin-top: 50px;
+            padding: 32px;
+            background: white;
+            border-radius: 12px;
+            border-left: 4px solid var(--terracotta);
+        }
+
+        .interests-note h3 {
+            font-family: 'Lora', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .interests-note p {
+            font-size: 15px;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: var(--warm-gray);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-image {
+                order: -1;
+                width: min(520px, 100%);
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .project-item,
+            .project-item:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+
+            .project-item:nth-child(even) .project-content {
+                order: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            .contact-section {
+                margin: 0 24px;
+            }
+
+            .hero-metrics {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .social-bar {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    Frank Healy
+                    <span class="logo-line"></span>
+                </div>
+                <div class="nav-links">
+                    <a href="#experience">Experience</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-image">
+                <img src="./images/website-photo.jpeg" alt="Frank Healy" class="image-main">
+                <div class="image-accent"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-eyebrow">Developer · Educator · Thinker</div>
+                <h1 class="hero-title">Crafting Digital Experiences with Precision & Purpose</h1>
+                <p class="hero-intro">With over 25 years of experience building enterprise-scale applications, I specialize in .NET, Azure, AWS, and modern web technologies. I bring a thoughtful approach to solving complex technical challenges while maintaining focus on elegant, maintainable solutions.</p>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <div class="metric-value">25+</div>
+                        <div class="metric-label">Years of Experience</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">BSc</div>
+                        <div class="metric-label">Computer Science</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">50+</div>
+                        <div class="metric-label">Projects Delivered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="section-intro">
+                <div class="section-label">Career Path</div>
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-description">From enterprise consulting to innovative startups, I've worked across diverse industries bringing technical expertise and strategic thinking to every project.</p>
+            </div>
+
+            <div class="experience-list">
+                <div class="experience-item">
+                    <div class="experience-sidebar">
+                        <div class="experience-company">Lifewave</div>
+                        <div class="experience-period">September 2024 — Present</div>
+                    </div>
+                    <div class="experience-main">
+                        <h3>Senior Full Stack Developer</h3>
+                        <ul>
+                            <li>Architecting enterprise applications with .NET Core 8, Azure, and React</li>
+                            <li>Leading technical strategy for cloud-native application development</li>
+                            <li>Establishing DevOps practices and CI/CD automation pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-sidebar">
+                        <div class="experience-company">IRBIS Capital</div>
+                        <div class="experience-period">June 2022 — August 2024</div>
+                    </div>
+                    <div class="experience-main">
+                        <h3>Senior Full Stack Developer</h3>
+                        <ul>
+                            <li>Built sophisticated financial analytics platform using .NET 6/8 and Azure</li>
+                            <li>Implemented real-time data processing with SignalR and event-driven architecture</li>
+                            <li>Mentored development team on architectural patterns and best practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-sidebar">
+                        <div class="experience-company">TII</div>
+                        <div class="experience-period">November 2021 — May 2022</div>
+                    </div>
+                    <div class="experience-main">
+                        <h3>Senior Software Engineer</h3>
+                        <ul>
+                            <li>Developed advanced research applications in AI and cryptography domains</li>
+                            <li>Collaborated with international research teams on cutting-edge technology</li>
+                            <li>Designed and implemented security-first architecture patterns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-sidebar">
+                        <div class="experience-company">Accenture</div>
+                        <div class="experience-period">September 2020 — October 2021</div>
+                    </div>
+                    <div class="experience-main">
+                        <h3>Senior Software Engineer</h3>
+                        <ul>
+                            <li>Delivered enterprise solutions for Fortune 500 multinational clients</li>
+                            <li>Led technical design of microservices-based distributed systems</li>
+                            <li>Coordinated with global development teams across multiple regions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-sidebar">
+                        <div class="experience-company">IAG</div>
+                        <div class="experience-period">March 2018 — August 2020</div>
+                    </div>
+                    <div class="experience-main">
+                        <h3>Senior Software Developer</h3>
+                        <ul>
+                            <li>Engineered insurance management systems using .NET and AWS cloud platform</li>
+                            <li>Established automated testing frameworks improving code quality metrics</li>
+                            <li>Optimized system performance reducing downtime by 40%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-intro">
+                <div class="section-label">Technical Toolkit</div>
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-description">A comprehensive foundation across languages, frameworks, cloud platforms, and modern development practices.</p>
+            </div>
+
+            <div class="skills-layout">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span>C# / .NET</span>
+                        <span>JavaScript / TypeScript</span>
+                        <span>Python</span>
+                        <span>SQL</span>
+                        <span>PowerShell</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Frameworks</h3>
+                    <div class="skill-list">
+                        <span>.NET Core 6/8</span>
+                        <span>React / Next.js</span>
+                        <span>Node.js / Express</span>
+                        <span>Angular</span>
+                        <span>ASP.NET MVC</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Cloud Platforms</h3>
+                    <div class="skill-list">
+                        <span>Microsoft Azure</span>
+                        <span>Amazon Web Services</span>
+                        <span>Azure DevOps</span>
+                        <span>Docker / Kubernetes</span>
+                        <span>Terraform</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Data & Storage</h3>
+                    <div class="skill-list">
+                        <span>SQL Server</span>
+                        <span>PostgreSQL</span>
+                        <span>MongoDB</span>
+                        <span>Redis Cache</span>
+                        <span>CosmosDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-intro">
+                <div class="section-label">Featured Work</div>
+                <h2 class="section-title">Recent Projects</h2>
+                <p class="section-description">A selection of projects that showcase full-stack development, cloud architecture, and modern application design.</p>
+            </div>
+
+            <div class="projects-layout">
+                <div class="project-item">
+                    <div class="project-visual">01</div>
+                    <div class="project-content">
+                        <h3>Enterprise CRM Platform</h3>
+                        <p>A comprehensive customer relationship management system built with .NET Core 8, React, and Azure. Features include real-time collaboration, advanced analytics, and seamless third-party integrations for enhanced productivity.</p>
+                        <div class="project-links">
+                            <a href="#">View Project</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-visual">02</div>
+                    <div class="project-content">
+                        <h3>Financial Analytics System</h3>
+                        <p>Real-time financial data processing and visualization platform utilizing SignalR for live updates, React for interactive dashboards, and Azure Functions for scalable backend processing capabilities.</p>
+                        <div class="project-links">
+                            <a href="#">View Project</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-visual">03</div>
+                    <div class="project-content">
+                        <h3>Cloud Migration Framework</h3>
+                        <p>Automated tooling for migrating legacy enterprise applications to cloud-native architecture on Azure and AWS. Reduces migration time by 60% while ensuring zero downtime and maintaining data integrity.</p>
+                        <div class="project-links">
+                            <a href="#">View Project</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-wrapper">
+            <h2>Let's Create Something Together</h2>
+            <p class="contact-intro">I'm always interested in hearing about challenging projects, collaboration opportunities, and meaningful conversations about technology and its intersections with science, philosophy, and the arts.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-card-label">Email</div>
+                    <div class="contact-card-value"><a href="/cdn-cgi/l/email-protection#a9cfdbc8c7c2e9ccd1c8c4d9c5cc87cac6c4"><span class="__cf_email__" data-cfemail="77110516191c37120f161a071b125914181a">[email&#160;protected]</span></a></div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-label">Location</div>
+                    <div class="contact-card-value">Dublin, Ireland</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-label">Phone</div>
+                    <div class="contact-card-value">+353 (0)87 XXX XXXX</div>
+                </div>
+            </div>
+
+            <div class="social-bar">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">YouTube</a>
+                <a href="#">Blog</a>
+            </div>
+
+            <div class="interests-note">
+                <h3>Beyond Code</h3>
+                <p>I write and create content exploring the fascinating intersections of physics, mathematics, music, and religion. Visit my blog and YouTube channel for thoughtful discussions on these diverse topics and their connections to technology and human experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Frank McGroarty. Designed with intention and care.</p>
+        </div>
+    </footer>
+</body>
+</html>
