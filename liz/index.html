@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Cremin - Website Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5a5f;
+            --accent: #c17767;
+            --cream: #f8f6f1;
+            --dark: #1a1a1a;
+            --text: #4a4a4a;
+            --success: #5cb85c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f6f1 0%, #e8dcc9 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .option-header {
+            background: linear-gradient(135deg, var(--primary), #4a7f86);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .option-number {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .option-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .option-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .option-content {
+            padding: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.7rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            color: var(--text);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #d4915c);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .best-for {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .best-for strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .best-for p {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .view-button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), #4a7f86);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(45, 90, 95, 0.3);
+        }
+
+        .view-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 90, 95, 0.4);
+            background: linear-gradient(135deg, #4a7f86, var(--primary));
+        }
+
+        .comparison-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .comparison-section h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .comparison-table th {
+            background: var(--cream);
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .comparison-table td {
+            color: var(--text);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(248, 246, 241, 0.5);
+        }
+
+        .check-yes {
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .check-no {
+            color: #ddd;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: var(--text);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.8rem;
+            }
+
+            header {
+                padding: 2rem 1.5rem;
+            }
+
+            .comparison-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .option-card:nth-child(1) { animation-delay: 0.1s; }
+        .option-card:nth-child(2) { animation-delay: 0.2s; }
+        .option-card:nth-child(3) { animation-delay: 0.3s; }
+        .option-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>Elizabeth Cremin</h1>
+            <p class="tagline">"Life's second chapters can be your most meaningful—I'm living proof"</p>
+            <p class="intro">
+                Welcome to the website options showcase for Elizabeth Cremin's therapy practice. 
+                Below you'll find four distinct, professional designs to choose from. Each option is fully responsive, 
+                production-ready, and includes the complete content for the practice.
+            </p>
+        </header>
+
+        <div class="options-grid">
+            <!-- Option 1 -->
+            <div class="option-card fade-in">
+                <div class="option-header">
+                    <div class="option-number">Option 1</div>
+                    <h2 class="option-title">Modern Professional</h2>
+                    <p class="option-subtitle">Contemporary & Engaging</p>
+                </div>
+                <div class="option-content">
+                    <div class="best-for">
+                        <strong>Best For:</strong>
+                        <p>Modern, approachable practice attracting younger professionals and tech-savvy clients.</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>Calming teal & ocean blue colors</li>
+                        <li>Floating emoji animations</li>
+                        <li>Full-screen gradient hero</li>
+                        <li>6 service cards with hover effects</li>
+                        <li>10 specialization areas</li>
+                        <li>4 detailed case studies</li>
+                        <li>Contact form with validation</li>
+                        <li>Scroll-triggered animations</li>
+                    </ul>
+                    <a href="option1.html" class="view-button">View Option 1 →</a>
+                </div>
+            </div>
+
+            <!-- Option 2 -->
+            <div class="option-card fade-in">
+                <div class="option-header">
+                    <div class="option-number">Option 2</div>
+                    <h2 class="option-title">Elegant Carousel</h2>
+                    <p class="option-subtitle">Scandinavian Minimalism</p>
+                </div>
+                <div class="option-content">
+                    <span class="highlight-badge">✨ Features Carousel</span>
+                    <div class="best-for">
+                        <strong>Best For:</strong>
+                        <p>Upscale, sophisticated presence for high-end clientele and professional referrals.</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>3-slide auto-advancing carousel</li>
+                        <li>Muted earth tones & elegant design</li>
+                        <li>Fixed parallax background</li>
+                        <li>Manual carousel navigation</li>
+                        <li>6 service grid boxes</li>
+                        <li>10 specializations (2 columns)</li>
+                        <li>Glass-morphism effects</li>
+                        <li>Ultra-clean minimalist aesthetic</li>
+                    </ul>
+                    <a href="option2.html" class="view-button">View Option 2 →</a>
+                </div>
+            </div>
+
+            <!-- Option 3 -->
+            <div class="option-card fade-in">
+                <div class="option-header">
+                    <div class="option-number">Option 3</div>
+                    <h2 class="option-title">Warm & Natural</h2>
+                    <p class="option-subtitle">Nature-Inspired Healing</p>
+                </div>
+                <div class="option-content">
+                    <div class="best-for">
+                        <strong>Best For:</strong>
+                        <p>Emphasizing holistic, nature-based healing with a warm, nurturing personal touch.</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>Sage green & terracotta palette</li>
+                        <li>Leaf icon branding (🌿)</li>
+                        <li>Organic transitions & animations</li>
+                        <li>Nature photography backgrounds</li>
+                        <li>6 service tiles with gradients</li>
+                        <li>10 specs on gradient background</li>
+                        <li>Warm contact layout</li>
+                        <li>Nurturing atmosphere throughout</li>
+                    </ul>
+                    <a href="option3.html" class="view-button">View Option 3 →</a>
+                </div>
+            </div>
+
+            <!-- Option 4 -->
+            <div class="option-card fade-in">
+                <div class="option-header">
+                    <div class="option-number">Option 4</div>
+                    <h2 class="option-title">Advanced Platform</h2>
+                    <p class="option-subtitle">Full-Featured Solution</p>
+                </div>
+                <div class="option-content">
+                    <span class="highlight-badge">🚀 Complete Platform</span>
+                    <div class="best-for">
+                        <strong>Best For:</strong>
+                        <p>Complete digital presence with booking system, client portal, and room to grow.</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>Interactive booking calendar</li>
+                        <li>Client portal login interface</li>
+                        <li>Auto-advancing carousel (3 slides)</li>
+                        <li>Testimonials showcase</li>
+                        <li>Resources library (6 items)</li>
+                        <li>Newsletter signup</li>
+                        <li>Statistics display</li>
+                        <li>Parallax scrolling effects</li>
+                        <li>Advanced animations & interactions</li>
+                    </ul>
+                    <a href="option4.html" class="view-button">View Option 4 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-section fade-in">
+            <h2>Quick Comparison</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Option 1</th>
+                        <th>Option 2</th>
+                        <th>Option 3</th>
+                        <th>Option 4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Carousel</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Booking Calendar</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Client Portal</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Case Studies</strong></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Testimonials</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resources Section</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Newsletter Signup</strong></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Design Complexity</strong></td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>Simple</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Modern Appeal</td>
+                        <td>Elegance</td>
+                        <td>Warmth</td>
+                        <td>Full Platform</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p><strong>All Options Include:</strong></p>
+            <p>Complete responsive design • Updated tagline • 10 specializations • Professional credentials • Contact forms</p>
+            <p class="footer-note">Each website is production-ready and can be customized with real photos and contact information.</p>
+            <p style="margin-top: 2rem; opacity: 0.7;">&copy; 2026 Elizabeth Cremin - Therapist & Counsellor</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Cremin - Therapist | Elegant Design with Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3d5a5c;
+            --secondary: #c9b99b;
+            --accent: #e8d4b4;
+            --dark: #1a1a1a;
+            --light: #fafafa;
+            --text: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--light);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(250, 250, 250, 0.8), rgba(250, 250, 250, 0.9)), 
+                        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600') center/cover fixed;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 2s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero .motto {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .cta {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .cta:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 1px;
+            background: var(--secondary);
+            margin: 2rem auto;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            background: white;
+            padding: 8rem 3rem;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem;
+            align-items: center;
+        }
+
+        .carousel-image {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .carousel-content h3 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .carousel-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .carousel-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev { left: 2rem; }
+        .carousel-arrow.next { right: 2rem; }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 4rem;
+        }
+
+        .service-box {
+            padding: 4rem 3rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.5s ease;
+            background: white;
+        }
+
+        .service-box:hover {
+            background: var(--light);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            z-index: 10;
+        }
+
+        .service-box h3 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .service-box p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Specializations */
+        .spec-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .spec-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .spec-item h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .spec-item p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Philosophy */
+        .philosophy {
+            text-align: center;
+            padding: 10rem 3rem;
+        }
+
+        .philosophy blockquote {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .philosophy-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        /* Contact */
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            margin-top: 4rem;
+        }
+
+        .contact-details {
+            padding: 3rem;
+            background: var(--light);
+        }
+
+        .contact-item {
+            margin-bottom: 3rem;
+        }
+
+        .contact-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        input, textarea, select {
+            padding: 1.2rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            padding: 1.2rem 3rem;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            align-self: flex-start;
+        }
+
+        button[type="submit"]:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 1rem 0;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--light);
+                flex-direction: column;
+                padding: 3rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .carousel-slide {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .carousel-image {
+                height: 300px;
+            }
+
+            .contact-grid,
+            .services-grid,
+            .spec-columns {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .philosophy blockquote {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Elizabeth Cremin</a>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="mobileNav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#specializations">Specializations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Elizabeth Cremin</h1>
+            <p class="subtitle">Therapist & Counsellor</p>
+            <p class="motto">"Life's second chapters can be your most meaningful—I'm living proof"</p>
+            <a href="#contact" class="cta">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section id="about" class="carousel-section">
+        <div class="section-header">
+            <h2>About</h2>
+            <div class="line"></div>
+            <p>From nursing to therapy—a journey of transformation and healing</p>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-arrow prev" onclick="prevSlide()">‹</button>
+            <button class="carousel-arrow next" onclick="nextSlide()">›</button>
+            
+            <div class="carousel" id="carousel">
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="carousel-badge">My Background</span>
+                        <h3>From Nursing to Therapy</h3>
+                        <p>After dedicating years to nursing, witnessing the profound connection between physical and mental wellbeing, I felt called to deepen my impact through therapeutic counselling.</p>
+                        <p>My nursing background provides invaluable insight into holistic health, understanding that true healing encompasses mind, body, and spirit.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="carousel-badge">My Approach</span>
+                        <h3>Evidence-Based Compassion</h3>
+                        <p>I integrate evidence-based therapeutic approaches with genuine compassion. Every person carries within them the capacity for growth and transformation.</p>
+                        <p>My practice combines Cognitive Behavioral Therapy, trauma-informed care, and solution-focused approaches, tailored specifically to your unique needs.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="carousel-badge">My Qualifications</span>
+                        <h3>Professional Credentials</h3>
+                        <p><strong>✓ Registered Nurse (RN)</strong> - 10+ years experience</p>
+                        <p><strong>✓ Diploma in Therapeutic Counselling</strong></p>
+                        <p><strong>✓ Certified Trauma-Informed Practitioner</strong></p>
+                        <p><strong>✓ Member, Professional Counselling Association of Ireland</strong></p>
+                        <p><strong>✓ Specialized Training</strong> in ADHD, Addiction, and Trauma Recovery</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                <button class="carousel-dot" onclick="goToSlide(2)"></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="fade-up">
+        <div class="section-header">
+            <h2>Services</h2>
+            <div class="line"></div>
+            <p>Comprehensive therapeutic support tailored to your unique journey</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-box">
+                <h3>Individual Therapy</h3>
+                <p>Personalized one-on-one sessions in a confidential, supportive environment focused on your specific needs and goals.</p>
+            </div>
+            <div class="service-box">
+                <h3>Couples Counselling</h3>
+                <p>Strengthen relationships through improved communication, conflict resolution, and deeper understanding.</p>
+            </div>
+            <div class="service-box">
+                <h3>Group Therapy</h3>
+                <p>Harness collective wisdom and shared experiences in professionally facilitated therapeutic groups.</p>
+            </div>
+            <div class="service-box">
+                <h3>Online Sessions</h3>
+                <p>Accessible therapy from anywhere through secure, confidential video conferencing platforms.</p>
+            </div>
+            <div class="service-box">
+                <h3>Solution-Focused Brief Therapy</h3>
+                <p>Goal-oriented approach emphasizing practical solutions and achievable outcomes.</p>
+            </div>
+            <div class="service-box">
+                <h3>Cognitive Behavioral Therapy</h3>
+                <p>Evidence-based methods to transform negative thought patterns and behaviors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="specializations" class="fade-up">
+        <div class="section-header">
+            <h2>Specializations</h2>
+            <div class="line"></div>
+            <p>Areas of focused therapeutic expertise</p>
+        </div>
+        <div class="spec-columns">
+            <div>
+                <div class="spec-item">
+                    <h4>ADHD</h4>
+                    <p>Comprehensive support for adults and adolescents navigating attention, focus, and executive function challenges.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Addiction & Recovery</h4>
+                    <p>Compassionate, evidence-based treatment for substance abuse and behavioral addictions.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Trauma & PTSD</h4>
+                    <p>Specialized trauma-informed care utilizing proven therapeutic modalities.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Anxiety Disorders</h4>
+                    <p>Treatment for generalized anxiety, panic disorder, social anxiety, and specific phobias.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Depression</h4>
+                    <p>Comprehensive support for managing depressive symptoms and rebuilding vitality.</p>
+                </div>
+            </div>
+            <div>
+                <div class="spec-item">
+                    <h4>Stress Management</h4>
+                    <p>Practical strategies for navigating workplace stress and life's demands.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Grief & Loss</h4>
+                    <p>Gentle guidance through the grieving process with compassion and understanding.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Self-Esteem</h4>
+                    <p>Building confidence, self-worth, and authentic self-expression.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Life Transitions</h4>
+                    <p>Support during major life changes, career shifts, and identity evolution.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Burnout</h4>
+                    <p>Recovery from professional exhaustion and restoration of work-life harmony.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy fade-up">
+        <blockquote>"Life's second chapters can be your most meaningful—I'm living proof"</blockquote>
+        <div class="philosophy-text">
+            <p>My journey from nursing to therapy wasn't just a career change—it was a complete transformation. After decades of caring for the body, I discovered my true calling in healing the soul. This transition taught me that it's never too late to begin again, to find new purpose, to write a different story.</p>
+            <p style="margin-top: 2rem;">I honor the inherent resilience within every person. Therapy isn't about fixing what's broken—it's about understanding your story, recognizing your strengths, and supporting you as you discover your own path forward. Your second chapter is waiting.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact fade-up">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <div class="line"></div>
+            <p>Take the first step toward transformation</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-details">
+                <div class="contact-item">
+                    <h4>Phone</h4>
+                    <p>+353 (0) 87 123 4567</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>elizabeth@cremintherapy.ie</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Location</h4>
+                    <p>Dublin, Ireland<br>Online sessions nationwide</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Hours</h4>
+                    <p>Mon-Fri: 9:00 AM - 7:00 PM<br>Sat: 10:00 AM - 2:00 PM<br>Evening appointments available</p>
+                </div>
+                <div class="contact-item">
+                    <h4>First Session</h4>
+                    <p>Free 15-minute consultation to ensure we're the right fit</p>
+                </div>
+            </div>
+            <form>
+                <div class="form-field">
+                    <label>Full Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-field">
+                    <label>Email *</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-field">
+                    <label>Phone</label>
+                    <input type="tel">
+                </div>
+                <div class="form-field">
+                    <label>Area of Interest *</label>
+                    <select required>
+                        <option value="">Select...</option>
+                        <option>ADHD</option>
+                        <option>Addiction</option>
+                        <option>Trauma</option>
+                        <option>Anxiety</option>
+                        <option>Depression</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Message *</label>
+                    <textarea required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Elizabeth Cremin - Therapist & Counsellor</p>
+        <p>Registered with Professional Counselling Association of Ireland</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel');
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 8000);
+
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Form
+        document.querySelector('form').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Thank you for reaching out. I will respond within 24 hours.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

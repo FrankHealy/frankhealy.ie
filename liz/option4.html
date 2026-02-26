@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Cremin - Advanced Therapy Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5a5f;
+            --primary-light: #4a7f86;
+            --accent: #d4915c;
+            --accent-dark: #b67841;
+            --cream: #f8f6f1;
+            --sand: #e8dcc9;
+            --text-dark: #2a2a2a;
+            --text-light: #6a6a6a;
+            --success: #5cb85c;
+            --info: #5bc0de;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-shape {
+            position: absolute;
+            opacity: 0.03;
+            animation: float-drift 20s infinite ease-in-out;
+        }
+
+        .shape-1 { 
+            width: 300px; 
+            height: 300px; 
+            background: radial-gradient(circle, var(--primary), transparent);
+            top: 10%; 
+            left: -10%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 { 
+            width: 400px; 
+            height: 400px; 
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: 10%; 
+            right: -15%;
+            animation-delay: 7s;
+        }
+        
+        .shape-3 { 
+            width: 250px; 
+            height: 250px; 
+            background: radial-gradient(circle, var(--primary-light), transparent);
+            top: 50%; 
+            right: 20%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float-drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(90deg); }
+            50% { transform: translate(-30px, 50px) rotate(180deg); }
+            75% { transform: translate(70px, 30px) rotate(270deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 246, 241, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(248, 246, 241, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::before {
+            content: '✦';
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white !important;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero with Parallax */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 0 3rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: linear-gradient(135deg, rgba(45, 90, 95, 0.85), rgba(74, 127, 134, 0.75)), 
+                        url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1800') center/cover;
+            transform: translateY(var(--parallax-offset, 0));
+            transition: transform 0.1s ease-out;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: heroFadeIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #f4a460);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.3rem 3rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            box-shadow: 0 10px 30px rgba(212, 145, 92, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 145, 92, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.3rem 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: bounce 2s infinite;
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            margin-top: -5rem;
+            border-radius: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: var(--cream);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .carousel-image {
+            flex: 1;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-content {
+            flex: 1;
+        }
+
+        .carousel-content .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel-content h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev { left: 2rem; }
+        .carousel-arrow.next { right: 2rem; }
+
+        /* Booking Calendar Section */
+        .booking-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 8rem 3rem;
+            color: white;
+        }
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+        }
+
+        .booking-info {
+            background: var(--cream);
+            padding: 4rem;
+        }
+
+        .booking-info h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .booking-info .highlight-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.8rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .highlight-box li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .calendar-wrapper {
+            padding: 4rem;
+            background: white;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .calendar-header h4 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-nav button {
+            background: var(--cream);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-day-label {
+            text-align: center;
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            background: var(--cream);
+            color: var(--text-dark);
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .calendar-day.available {
+            background: var(--cream);
+        }
+
+        .calendar-day.selected {
+            background: var(--accent);
+            color: white;
+        }
+
+        .calendar-day.unavailable {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .time-slot {
+            padding: 1rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .time-slot:hover {
+            border-color: var(--accent);
+            background: white;
+        }
+
+        .time-slot.selected {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Client Portal Login */
+        .portal-section {
+            background: white;
+        }
+
+        .portal-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .portal-features {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--cream);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .portal-login {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .portal-login h4 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .login-options a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .login-options a:hover {
+            text-decoration: underline;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--cream);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .author-info h5 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Interactive Resources */
+        .resources {
+            background: white;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: var(--cream);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .resource-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .resource-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .resource-content {
+            padding: 2rem;
+        }
+
+        .resource-content h4 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .resource-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .resource-link:hover {
+            gap: 1rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            padding: 5rem 3rem;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 1.2rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 5rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--cream);
+                flex-direction: column;
+                padding: 3rem;
+                transition: right 0.4s ease;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .carousel-slide {
+                flex-direction: column;
+                padding: 2rem;
+            }
+
+            .booking-container,
+            .portal-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--sand);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Elizabeth Cremin</a>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Book Session</a></li>
+                <li><a href="#portal">Client Portal</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#portal" class="nav-cta">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Professional Therapy & Counselling</div>
+            <h1>Elizabeth Cremin<br><span class="highlight">Transform Your Life</span></h1>
+            <p class="hero-subtitle">Registered Nurse Turned Therapist</p>
+            <p class="hero-tagline">"Life's second chapters can be your most meaningful—I'm living proof"</p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn-primary">Book Free Consultation →</a>
+                <button class="btn-secondary" onclick="document.getElementById('portalLogin').scrollIntoView({behavior: 'smooth'})">Client Portal Login</button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 0.9rem; letter-spacing: 1px;">Scroll to explore</span>
+            <span style="font-size: 1.5rem;">↓</span>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Clients Helped</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Online Support</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel Section -->
+    <section id="about" class="fade-in">
+        <div class="section-header">
+            <div class="section-label">Who I Am</div>
+            <h2 class="section-title">My Journey</h2>
+            <p class="section-subtitle">From healthcare to healing minds—bringing holistic care to mental wellness</p>
+        </div>
+        
+        <div class="carousel-container">
+            <button class="carousel-arrow prev" onclick="prevSlide()">‹</button>
+            <button class="carousel-arrow next" onclick="nextSlide()">›</button>
+            
+            <div class="carousel" id="carousel">
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="badge">My Background</span>
+                        <h3>From Nursing to Therapy</h3>
+                        <p>After dedicating years to nursing, witnessing the profound connection between physical and mental wellbeing, I felt called to deepen my impact through therapeutic counselling.</p>
+                        <p>My nursing background provides invaluable insight into holistic health, understanding that true healing encompasses mind, body, and spirit. I bring compassion, clinical insight, and a genuine commitment to creating a safe space where healing unfolds naturally.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="badge">My Approach</span>
+                        <h3>Evidence-Based Compassion</h3>
+                        <p>I integrate evidence-based therapeutic approaches with genuine compassion. Every person carries within them the capacity for growth and transformation—sometimes we just need the right support to unlock that potential.</p>
+                        <p>My practice combines Cognitive Behavioral Therapy, trauma-informed care, and solution-focused approaches, tailored specifically to your unique needs and goals.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=800')"></div>
+                    <div class="carousel-content">
+                        <span class="badge">My Qualifications</span>
+                        <h3>Professional Credentials</h3>
+                        <p><strong>✓ Registered Nurse (RN)</strong> - 10+ years experience</p>
+                        <p><strong>✓ Diploma in Therapeutic Counselling</strong> - Accredited program</p>
+                        <p><strong>✓ Certified Trauma-Informed Practitioner</strong></p>
+                        <p><strong>✓ Member, Professional Counselling Association of Ireland</strong></p>
+                        <p><strong>✓ Specialized Training</strong> in ADHD, Addiction, and Trauma Recovery</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                <button class="carousel-dot" onclick="goToSlide(2)"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Calendar Section -->
+    <section id="booking" class="booking-section">
+        <div class="section-header" style="color: white;">
+            <div class="section-label" style="color: var(--accent);">Schedule Your Session</div>
+            <h2 class="section-title" style="color: white;">Book an Appointment</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Select a date and time that works best for you</p>
+        </div>
+
+        <div class="booking-container">
+            <div class="booking-info">
+                <h3>What to Expect</h3>
+                <div class="highlight-box">
+                    <h4>First Session Benefits</h4>
+                    <ul>
+                        <li>Free 15-minute consultation call</li>
+                        <li>Confidential assessment</li>
+                        <li>Personalized treatment plan</li>
+                        <li>Flexible scheduling options</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h4>Session Types</h4>
+                    <ul>
+                        <li>50-minute individual sessions</li>
+                        <li>75-minute couples sessions</li>
+                        <li>Online or in-person available</li>
+                        <li>Evening appointments available</li>
+                    </ul>
+                </div>
+                <p style="color: var(--text-light); margin-top: 2rem; font-size: 0.95rem;">
+                    <strong>Note:</strong> All appointments are subject to confirmation. You'll receive an email within 2 hours to confirm your booking.
+                </p>
+            </div>
+
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <h4 id="currentMonth">January 2026</h4>
+                    <div class="calendar-nav">
+                        <button onclick="prevMonth()">‹</button>
+                        <button onclick="nextMonth()">›</button>
+                    </div>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid">
+                    <div class="calendar-day-label">Sun</div>
+                    <div class="calendar-day-label">Mon</div>
+                    <div class="calendar-day-label">Tue</div>
+                    <div class="calendar-day-label">Wed</div>
+                    <div class="calendar-day-label">Thu</div>
+                    <div class="calendar-day-label">Fri</div>
+                    <div class="calendar-day-label">Sat</div>
+                    <!-- Calendar days will be generated by JavaScript and appended here -->
+                </div>
+
+                <h4 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">Available Times</h4>
+                <div class="time-slots" id="timeSlots">
+                    <div class="time-slot">9:00 AM</div>
+                    <div class="time-slot">10:30 AM</div>
+                    <div class="time-slot">12:00 PM</div>
+                    <div class="time-slot">2:00 PM</div>
+                    <div class="time-slot">3:30 PM</div>
+                    <div class="time-slot">5:00 PM</div>
+                    <div class="time-slot">6:30 PM</div>
+                    <div class="time-slot">8:00 PM</div>
+                </div>
+
+                <button class="btn-primary" style="width: 100%; margin-top: 2rem; justify-content: center;" onclick="confirmBooking()">
+                    Confirm Booking →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Portal Section -->
+    <section id="portal" class="portal-section fade-in">
+        <div class="section-header">
+            <div class="section-label">Secure Access</div>
+            <h2 class="section-title">Client Portal</h2>
+            <p class="section-subtitle">Manage your therapy journey anytime, anywhere</p>
+        </div>
+
+        <div class="portal-container">
+            <div class="portal-features">
+                <div class="feature-card slide-in-left">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h4>Session Management</h4>
+                        <p>View upcoming appointments, reschedule sessions, and access session notes all in one secure place.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card slide-in-left">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-content">
+                        <h4>Secure Messaging</h4>
+                        <p>Communicate securely between sessions. Get support when you need it with our encrypted messaging system.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card slide-in-left">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h4>Progress Tracking</h4>
+                        <p>Monitor your therapeutic journey with visual progress reports, mood tracking, and goal achievement metrics.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card slide-in-left">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-content">
+                        <h4>Resources & Tools</h4>
+                        <p>Access personalized worksheets, meditation guides, and therapeutic resources tailored to your needs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portal-login slide-in-right" id="portalLogin">
+                <h4>Client Login</h4>
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="login-options">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" style="width: auto;">
+                            Remember me
+                        </label>
+                        <a href="#forgot">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                        Access Portal →
+                    </button>
+                    <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                        New client? <a href="#booking" style="color: white; font-weight: 600;">Book your first session</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials fade-in">
+        <div class="section-header">
+            <div class="section-label">Client Experiences</div>
+            <h2 class="section-title">What Clients Say</h2>
+            <p class="section-subtitle">Real stories of transformation and healing</p>
+        </div>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">"Elizabeth's unique background as a nurse gives her an understanding that goes beyond traditional therapy. She helped me overcome my ADHD challenges and I'm now thriving in my career. Her compassion and expertise changed my life."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h5>Sarah M.</h5>
+                        <p>Marketing Professional</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">"After years of struggling with addiction, I finally found someone who understood. Elizabeth's approach is both professional and deeply caring. 18 months sober and I've never felt stronger. She saved my family."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h5>Michael R.</h5>
+                        <p>Recovery Advocate</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">"The PTSD from my accident was debilitating. Elizabeth's trauma-informed approach helped me process everything at my own pace. I'm driving again, living again. I can't thank her enough for giving me my life back."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">E</div>
+                    <div class="author-info">
+                        <h5>Emma K.</h5>
+                        <p>Teacher</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources fade-in">
+        <div class="section-header">
+            <div class="section-label">Self-Help Tools</div>
+            <h2 class="section-title">Therapeutic Resources</h2>
+            <p class="section-subtitle">Free guides and tools to support your mental health journey</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600')">
+                    <span class="resource-badge">Free Guide</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Understanding ADHD</h4>
+                    <p>Comprehensive guide to recognizing symptoms, strategies for management, and when to seek professional help.</p>
+                    <a href="#" class="resource-link">Download PDF →</a>
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600')">
+                    <span class="resource-badge">Meditation</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Anxiety Relief Techniques</h4>
+                    <p>Audio-guided meditation and breathing exercises to help manage anxiety and find calm in difficult moments.</p>
+                    <a href="#" class="resource-link">Listen Now →</a>
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=600')">
+                    <span class="resource-badge">Worksheet</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Mood Tracking Journal</h4>
+                    <p>Printable daily mood tracker to help identify patterns, triggers, and celebrate progress in your healing journey.</p>
+                    <a href="#" class="resource-link">Get Template →</a>
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600')">
+                    <span class="resource-badge">Article</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Coping with Trauma</h4>
+                    <p>Evidence-based strategies for processing traumatic experiences and building resilience through difficult times.</p>
+                    <a href="#" class="resource-link">Read More →</a>
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600')">
+                    <span class="resource-badge">Video Series</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Addiction Recovery Basics</h4>
+                    <p>5-part video series covering the fundamentals of recovery, relapse prevention, and building a support system.</p>
+                    <a href="#" class="resource-link">Watch Series →</a>
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-image" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600')">
+                    <span class="resource-badge">Workbook</span>
+                </div>
+                <div class="resource-content">
+                    <h4>Building Self-Esteem</h4>
+                    <p>Interactive workbook with exercises designed to challenge negative self-talk and develop genuine self-compassion.</p>
+                    <a href="#" class="resource-link">Download →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <h3>Stay Connected</h3>
+        <p>Receive monthly wellness tips, therapeutic insights, and updates directly to your inbox</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Elizabeth Cremin</h3>
+                <p>Professional therapy and counselling services combining clinical expertise with genuine compassion. Specializing in ADHD, addiction, trauma, and holistic mental wellness.</p>
+                <p style="margin-top: 1.5rem;">"Life's second chapters can be your most meaningful—I'm living proof"</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#booking">Book Session</a></li>
+                    <li><a href="#portal">Client Portal</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Specializations</h4>
+                <ul>
+                    <li><a href="#">ADHD</a></li>
+                    <li><a href="#">Addiction Recovery</a></li>
+                    <li><a href="#">Trauma & PTSD</a></li>
+                    <li><a href="#">Anxiety & Depression</a></li>
+                    <li><a href="#">Life Transitions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li>Dublin, Ireland</li>
+                    <li>+353 (0) 87 123 4567</li>
+                    <li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a0a9acbfa4a7a0b1ad85a6b7a0a8acabb1ada0b7a4b5bcebaca0">[email&#160;protected]</a></li>
+                    <li style="margin-top: 1rem;">Mon-Fri: 9AM-7PM</li>
+                    <li>Sat: 10AM-2PM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elizabeth Cremin - Therapist & Counsellor. All rights reserved.</p>
+            <p>Registered with Professional Counselling Association of Ireland | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Loading animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroElement = document.querySelector('.hero-bg');
+            if (heroElement) {
+                heroElement.style.setProperty('--parallax-offset', `${scrolled * 0.5}px`);
+            }
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            if (scrolled > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel');
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 8000);
+
+        // Calendar functionality
+        let currentMonth = 0;
+        let currentYear = 2026;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            // Get all children and keep only the day labels (first 7 elements)
+            const dayLabels = Array.from(calendarGrid.children).slice(0, 7);
+            calendarGrid.innerHTML = '';
+            
+            // Re-add day labels
+            dayLabels.forEach(label => calendarGrid.appendChild(label));
+            
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Add empty cells for days before month starts
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day unavailable';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Add days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day available';
+                dayElement.textContent = day;
+                dayElement.onclick = () => selectDay(dayElement);
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            document.getElementById('currentMonth').textContent = `${months[currentMonth]} ${currentYear}`;
+        }
+
+        function selectDay(element) {
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar();
+        }
+
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        // Time slot selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        function confirmBooking() {
+            const selectedDay = document.querySelector('.calendar-day.selected');
+            const selectedTime = document.querySelector('.time-slot.selected');
+            
+            if (selectedDay && selectedTime) {
+                alert(`Booking confirmed for ${months[currentMonth]} ${selectedDay.textContent}, ${currentYear} at ${selectedTime.textContent}!\n\nYou will receive a confirmation email within 2 hours.`);
+            } else {
+                alert('Please select both a date and time for your appointment.');
+            }
+        }
+
+        // Initialize calendar
+        generateCalendar();
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Portal login functionality would connect to your backend authentication system.');
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! You\'ll receive your first newsletter soon.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

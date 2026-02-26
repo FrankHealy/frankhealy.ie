@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Cremin - Therapist & Counsellor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c5f6f;
+            --secondary-color: #8ab5c1;
+            --accent-color: #d4a574;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(44, 95, 111, 0.9), rgba(138, 181, 193, 0.8)), 
+                        url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 strong {
+            font-weight: 700;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: #c09463;
+        }
+
+        /* Floating Elements Animation */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800') center/cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(44, 95, 111, 0.3), transparent);
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .credentials {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .credentials h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .credentials ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .credentials li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+        }
+
+        .credentials li::before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Specializations */
+        .specializations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .spec-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .spec-item:hover {
+            border-left-color: var(--accent-color);
+            transform: translateX(10px);
+        }
+
+        .spec-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Case Studies */
+        .case-studies {
+            background: var(--bg-light);
+        }
+
+        .case-study {
+            background: var(--white);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .case-study:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .case-study h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .case-label {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-study p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .case-outcome {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .case-outcome strong {
+            color: var(--primary-color);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+        }
+
+        .philosophy blockquote {
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 300;
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .philosophy p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item div {
+            flex: 1;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item span {
+            color: var(--text-light);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 350px;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-grid,
+            .specializations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .philosophy blockquote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Elizabeth Cremin</a>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#services" onclick="closeMenu()">Services</a></li>
+                <li><a href="#specializations" onclick="closeMenu()">Specializations</a></li>
+                <li><a href="#case-studies" onclick="closeMenu()">Case Studies</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-element">🌿</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">💚</div>
+        <div class="hero-content">
+            <h1>Elizabeth Cremin <strong>Therapist & Counsellor</strong></h1>
+            <p>"Life's second chapters can be your most meaningful—I'm living proof"</p>
+            <a href="#contact" class="cta-button">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="scroll-animate">
+        <h2 class="section-title">About Elizabeth</h2>
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h3>From Healthcare to Healing Minds</h3>
+                <p>After dedicating years to nursing, where I witnessed firsthand the profound connection between physical and mental wellbeing, I felt called to deepen my impact through therapeutic counselling. This transition wasn't a departure from care—it was an evolution of it.</p>
+                
+                <p>My background in nursing provides me with a unique perspective on holistic health, understanding that true healing encompasses mind, body, and spirit. I bring compassion, clinical insight, and a genuine commitment to creating a safe, non-judgmental space where healing can unfold naturally.</p>
+                
+                <p>I believe that everyone carries within them the capacity for growth and transformation. Sometimes we just need the right support, at the right time, to unlock that potential.</p>
+
+                <div class="credentials">
+                    <h4>Professional Qualifications</h4>
+                    <ul>
+                        <li>Registered Nurse (RN)</li>
+                        <li>Diploma in Therapeutic Counselling</li>
+                        <li>Certified Trauma-Informed Practitioner</li>
+                        <li>Member of Professional Counselling Association</li>
+                        <li>Continuing Professional Development in ADHD & Addiction</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services scroll-animate">
+        <h2 class="section-title">Therapeutic Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🧘</div>
+                <h3>Individual Therapy</h3>
+                <p>One-on-one sessions tailored to your unique needs, providing a confidential space to explore thoughts, feelings, and behaviors in a supportive environment.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Couples Counselling</h3>
+                <p>Navigate relationship challenges, improve communication, and strengthen your connection through evidence-based therapeutic approaches.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌱</div>
+                <h3>Group Therapy</h3>
+                <p>Benefit from shared experiences and collective healing in professionally facilitated group sessions focused on specific challenges.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Online Sessions</h3>
+                <p>Access professional therapy from the comfort of your home through secure video conferencing, offering flexibility and convenience.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Brief Solution-Focused Therapy</h3>
+                <p>Goal-oriented approach focusing on solutions and practical strategies for immediate challenges and specific life situations.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🧠</div>
+                <h3>Cognitive Behavioral Therapy</h3>
+                <p>Evidence-based approach to identify and change negative thought patterns and behaviors, fostering healthier coping mechanisms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specializations Section -->
+    <section id="specializations" class="scroll-animate">
+        <h2 class="section-title">Areas of Specialization</h2>
+        <div class="specializations-grid">
+            <div class="spec-item">
+                <h4>ADHD</h4>
+                <p>Supporting adults and adolescents with ADHD through strategies for focus, organization, and emotional regulation.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Addiction & Recovery</h4>
+                <p>Compassionate support for substance abuse, behavioral addictions, and the journey toward sustainable recovery.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Trauma & PTSD</h4>
+                <p>Trauma-informed care utilizing evidence-based approaches to process and heal from traumatic experiences.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Anxiety Disorders</h4>
+                <p>Effective treatment for generalized anxiety, panic disorder, social anxiety, and phobias through proven therapeutic methods.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Depression</h4>
+                <p>Comprehensive support for managing depression, building resilience, and rediscovering joy and purpose in life.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Stress Management</h4>
+                <p>Practical tools and techniques for managing workplace stress, life transitions, and overwhelming responsibilities.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Grief & Loss</h4>
+                <p>Gentle guidance through the grieving process, honoring your loss while finding a path toward healing.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Self-Esteem Issues</h4>
+                <p>Building confidence, self-worth, and positive self-image through supportive therapeutic exploration.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Life Transitions</h4>
+                <p>Navigating major life changes including career shifts, relationship changes, relocation, and identity exploration.</p>
+            </div>
+            <div class="spec-item">
+                <h4>Workplace Burnout</h4>
+                <p>Addressing professional exhaustion, restoring work-life balance, and developing sustainable career practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="case-studies scroll-animate">
+        <h2 class="section-title">Success Stories</h2>
+        
+        <div class="case-study">
+            <span class="case-label">ADHD Management</span>
+            <h3>Finding Focus: Sarah's Journey</h3>
+            <p>Sarah, a 32-year-old marketing professional, came to therapy struggling with undiagnosed ADHD that was impacting her career and relationships. She described feeling constantly overwhelmed, missing deadlines despite working long hours, and experiencing significant anxiety about her performance.</p>
+            <p>Through our work together, Sarah learned to recognize her ADHD patterns and develop personalized strategies. We focused on creating supportive structures, breaking tasks into manageable steps, and practicing self-compassion rather than self-criticism.</p>
+            <div class="case-outcome">
+                <strong>Outcome:</strong> After six months of therapy, Sarah reported a 70% improvement in task completion, reduced anxiety, and a renewed sense of confidence. She successfully negotiated workplace accommodations and now mentors others with ADHD.
+            </div>
+        </div>
+
+        <div class="case-study">
+            <span class="case-label">Addiction Recovery</span>
+            <h3>Breaking Free: Michael's Story</h3>
+            <p>Michael, a 45-year-old father of two, sought help for alcohol dependency that had developed over a decade. His drinking had escalated following a series of career setbacks, and he was at risk of losing his family. Michael felt trapped, ashamed, and uncertain whether change was possible.</p>
+            <p>Our therapeutic work combined motivational interviewing, cognitive-behavioral strategies, and trauma-informed approaches to address the underlying pain fueling his addiction. We explored healthier coping mechanisms and rebuilt his support network.</p>
+            <div class="case-outcome">
+                <strong>Outcome:</strong> Michael has maintained sobriety for 18 months. He has repaired relationships with his family, found meaningful employment, and now volunteers at a local recovery center, giving back to others on similar journeys.
+            </div>
+        </div>
+
+        <div class="case-study">
+            <span class="case-label">Trauma Recovery</span>
+            <h3>Reclaiming Peace: Emma's Healing</h3>
+            <p>Emma, a 28-year-old teacher, experienced debilitating PTSD symptoms following a serious car accident. She struggled with intrusive memories, hypervigilance, and avoided driving entirely. Her world had become increasingly small and isolated.</p>
+            <p>Using trauma-focused therapeutic approaches, we worked at Emma's pace to process her experience safely. We employed grounding techniques, gradual exposure therapy, and narrative work to help her integrate the trauma without being overwhelmed by it.</p>
+            <div class="case-outcome">
+                <strong>Outcome:</strong> After 12 months of therapy, Emma has returned to driving, her PTSD symptoms have decreased significantly, and she reports feeling "like myself again." She has resumed activities she loves and is planning a road trip she once thought impossible.
+            </div>
+        </div>
+
+        <div class="case-study">
+            <span class="case-label">Anxiety & Depression</span>
+            <h3>Emerging from the Shadows: James's Transformation</h3>
+            <p>James, a 38-year-old software developer, had been living with unaddressed depression and social anxiety for years. He isolated himself, struggled with motivation, and felt disconnected from life's possibilities. He came to therapy as a "last resort" after gentle encouragement from his sister.</p>
+            <p>We worked together to understand the roots of James's depression, challenge negative thought patterns, and gradually expand his comfort zone. Small victories were celebrated, and setbacks were reframed as learning opportunities.</p>
+            <div class="case-outcome">
+                <strong>Outcome:</strong> James now maintains a supportive social circle, has pursued hobbies he'd abandoned, and reports feeling genuinely hopeful about his future. He describes therapy as "the investment that gave me back my life."
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="philosophy scroll-animate">
+        <h2 class="section-title" style="color: white;">My Philosophy</h2>
+        <blockquote>"Life's second chapters can be your most meaningful—I'm living proof"</blockquote>
+        <p>My journey from nursing to therapy wasn't just a career change—it was a complete transformation. After decades of caring for the body, I discovered my true calling in healing the soul. This transition taught me that it's never too late to begin again, to find new purpose, to write a different story.</p>
+        <p>I believe in the inherent resilience of the human spirit. Every person carries strengths they may not yet recognize. Therapy isn't about fixing what's broken—it's about honoring your journey, understanding your story, and supporting you as you discover your own path forward. Your second chapter is waiting.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="scroll-animate">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <i>📞</i>
+                    <div>
+                        <strong>Phone</strong>
+                        <span>+353 (0) 87 123 4567</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <div>
+                        <strong>Email</strong>
+                        <span>elizabeth@cremintherapy.ie</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i>📍</i>
+                    <div>
+                        <strong>Location</strong>
+                        <span>Dublin, Ireland<br>Online sessions available nationwide</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i>🕐</i>
+                    <div>
+                        <strong>Hours</strong>
+                        <span>Monday - Friday: 9:00 AM - 7:00 PM<br>Saturday: 10:00 AM - 2:00 PM<br>Evening appointments available</span>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 5px;">
+                    <p style="color: var(--text-dark); margin: 0;"><strong>First Session:</strong> Free 15-minute consultation call to ensure we're the right fit for your needs.</p>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="interest">Area of Interest *</label>
+                    <select id="interest" name="interest" required>
+                        <option value="">Please select...</option>
+                        <option value="adhd">ADHD</option>
+                        <option value="addiction">Addiction & Recovery</option>
+                        <option value="trauma">Trauma & PTSD</option>
+                        <option value="anxiety">Anxiety</option>
+                        <option value="depression">Depression</option>
+                        <option value="stress">Stress Management</option>
+                        <option value="grief">Grief & Loss</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Tell me a bit about what brings you here today..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" required style="width: auto; margin-right: 0.5rem;">
+                        I understand this is not an emergency service. If you're in crisis, please contact emergency services or a crisis helpline immediately.
+                    </label>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2026 Elizabeth Cremin - Therapist & Counsellor. All rights reserved.</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">Confidential & Professional Therapeutic Services</p>
+        <p style="font-size: 0.85rem; color: #888; margin-top: 1rem;">Registered with Professional Counselling Association of Ireland</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out. I will respond to your inquiry within 24 hours. If this is urgent, please call the phone number provided.');
+            this.reset();
+        });
+
+        // Service card interactions
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
